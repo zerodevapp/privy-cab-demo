@@ -59,7 +59,7 @@ export default function SendTokenForm({
       await fetchBalance();
 
       // Clear the form
-      setRecipient("");
+      setRecipient("0x");
       setAmount("");
     } catch (error) {
       console.error("Error sending tokens:", error);
@@ -81,7 +81,7 @@ export default function SendTokenForm({
             id="recipient"
             placeholder="0x..."
             value={recipient}
-            onChange={(e) => setRecipient(e.target.value)}
+            onChange={(e) => setRecipient(e.target.value as `0x${string}`)}
           />
         </div>
         <div className="space-y-2">
