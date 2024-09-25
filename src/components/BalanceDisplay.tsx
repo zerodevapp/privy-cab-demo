@@ -20,7 +20,7 @@ export default function BalanceDisplay({
         Chain-Abstracted Balance
       </Label>
       <div className="text-2xl font-bold text-blue-600">
-        {balance !== null ? `${formatBalance(balance)} 6TEST` : "Loading..."}
+        {balance !== null ? `${formatBalance(balance)} USDC` : "Loading..."}
       </div>
     </>
   );

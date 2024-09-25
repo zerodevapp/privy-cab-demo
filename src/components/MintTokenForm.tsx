@@ -30,7 +30,7 @@ export default function MintTokenForm({
     try {
       const amountToMint = BigInt(10 * 10 ** 6);
       const txHash = await mint(cabClient.account.address, amountToMint);
-      console.log(`Minted 10 6TEST tokens. Transaction hash: ${txHash}`);
+      console.log(`Minted 10 USDC tokens. Transaction hash: ${txHash}`);
 
       // Update the balance
       await fetchBalance();
@@ -48,7 +48,7 @@ export default function MintTokenForm({
       </CardHeader>
       <CardContent>
         <p className="text-sm text-gray-500 mb-4">
-          Click the button below to mint 10 6TEST erc20 tokens to your account.
+          Click the button below to mint 10 USDC erc20 tokens to your account.
           The mint will happen on base sepolia but the tokens will be available
           on all supported chains.
         </p>
@@ -63,7 +63,7 @@ export default function MintTokenForm({
             "Minting..."
           ) : (
             <>
-              <CoinsIcon className="mr-2 h-4 w-4" /> Mint 10 6TEST Tokens
+              <CoinsIcon className="mr-2 h-4 w-4" /> Mint 10 USDC Tokens
             </>
           )}
         </Button>

@@ -53,10 +53,11 @@ export default function MagicAccountDemo() {
       <Card className="w-full max-w-4xl">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl font-bold text-blue-600">
-            Magic Account Dashboard
+            Magic Account + Privy Demo
           </CardTitle>
           <CardDescription>
-            Demo of Magic Account's Chain Abstracted Balance with Privy
+            Mint some test tokens, then spend them on any chain, without
+            bridging.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -125,10 +126,10 @@ export default function MagicAccountDemo() {
                 </Alert>
               )}
 
-              <Tabs defaultValue="send" className="w-full">
+              <Tabs defaultValue="deposit" className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="send">Send</TabsTrigger>
                   <TabsTrigger value="deposit">Deposit</TabsTrigger>
+                  <TabsTrigger value="send">Send</TabsTrigger>
                 </TabsList>
                 <TabsContent value="send">
                   <SendTokenForm

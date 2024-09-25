@@ -34,7 +34,7 @@ export default function SendTokenForm({
   isChainAbstractionEnabled: boolean;
 }) {
   const { refetch: fetchBalance } = useCABBalance(cabClient, isChainAbstractionEnabled);
-  const [recipient, setRecipient] = useState("");
+  const [recipient, setRecipient] = useState(cabClient.account.address);
   const [amount, setAmount] = useState("");
   const { sendToken, isLoading: isSending } = useSendCabToken();
 
@@ -52,7 +52,7 @@ export default function SendTokenForm({
         amountToSend
       );
       console.log(
-        `Sent ${amount} 6TEST tokens to ${recipient}. Transaction hash: ${txHash}`
+        `Sent ${amount} USDC tokens to ${recipient}. Transaction hash: ${txHash}`
       );
 
       // Update the balance
