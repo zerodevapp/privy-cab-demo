@@ -95,3 +95,10 @@ export const getPublicRpc = (chainId: number) => {
     }
     return chain.publicRpc
 }
+
+export const jiffyScanNetworkName = {
+    [polygonAmoy.id]: "polygon-amoy",
+    [arbitrumSepolia.id]: "arbitrum-sepolia",
+    [optimismSepolia.id]: "optimism-sepolia",
+    [baseSepolia.id]: "base-sepolia",
+}

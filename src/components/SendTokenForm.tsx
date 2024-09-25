@@ -22,6 +22,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useCABBalance } from "@/hooks/useCabBalance";
+import TransactionLink from "@/components/TransactionLink";
+import { jiffyScanNetworkName } from "@/utils/chains";
 
 export default function SendTokenForm({
   cabClient,
@@ -37,6 +39,10 @@ export default function SendTokenForm({
   const [recipient, setRecipient] = useState(cabClient.account.address);
   const [amount, setAmount] = useState("");
   const { sendToken, isLoading: isSending } = useSendCabToken();
+  const [transactionInfo, setTransactionInfo] = useState<{
+    userOpHash: `0x${string}`;
+    transactionUrl: string;
+  } | null>(null);
 
   const handleSend = async () => {
     if (!cabClient || !recipient || !amount) {
@@ -51,6 +57,11 @@ export default function SendTokenForm({
         recipient as `0x${string}`,
         amountToSend
       );
+      const networkName = jiffyScanNetworkName[cabClient.chain.id as keyof typeof jiffyScanNetworkName];
+      setTransactionInfo({
+        userOpHash: txHash,
+        transactionUrl: `https://jiffyscan.xyz/userOpHash/${txHash}?network=${networkName}`,
+      });
       console.log(
         `Sent ${amount} USDC tokens to ${recipient}. Transaction hash: ${txHash}`
       );
@@ -65,6 +76,10 @@ export default function SendTokenForm({
       console.error("Error sending tokens:", error);
     }
   };
+
+  const handleCloseTransactionInfo = () => {
+    setTransactionInfo(null)
+  }
 
   return (
     <Card>
@@ -96,7 +111,10 @@ export default function SendTokenForm({
         </div>
         <div className="space-y-2">
           <Label htmlFor="chain">Destination Chain</Label>
-          <Select onValueChange={(value) => setChain(Number(value))}>
+          <Select 
+            onValueChange={(value) => setChain(Number(value))}
+            defaultValue={cabClient.chain.id.toString()}
+          >
             <SelectTrigger id="chain">
               <SelectValue placeholder="Select chain" />
             </SelectTrigger>
@@ -110,7 +128,7 @@ export default function SendTokenForm({
           </Select>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-4">
         <Button
           onClick={handleSend}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white"
@@ -124,6 +142,7 @@ export default function SendTokenForm({
             </>
           )}
         </Button>
+        <TransactionLink transactionInfo={transactionInfo} onClose={handleCloseTransactionInfo} />
       </CardFooter>
     </Card>
   );
