@@ -25,6 +25,7 @@ export function useCABBalance(
     queryKey: ['cabBalance', cabClient?.account.address, isChainAbstractionEnabled],
     queryFn: fetchBalance,
     enabled: !!cabClient && isChainAbstractionEnabled,
+    refetchInterval: 3000,
   });
 
   const formatBalance = (value: bigint | null | undefined) => {
